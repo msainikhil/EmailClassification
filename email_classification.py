@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 from nltk import NaiveBayesClassifier, classify
 
 # Once text is pre-processed, you can extract the features characterising spam and ham emails
-#The first thing to notice is that some words like “the”, “is” or “of” appear in all emails, don’t have much content to them 
+#The first thing to notice is that some words like the, is or of appear in all emails, dont have much content to them 
 #and are therefore not going to help you distinguish spam from non spam. Such words are called stopwords and they can be 
 #disregarded during classification. NLTK has a corpus of stopwords for several languages including English.
 stoplist = stopwords.words('english')
@@ -40,7 +40,7 @@ def preprocess(sentence):
 #either calculate how frequently it occurs in the text, or simply register the fact that the word occurs in the email. 
 #The former approach is called the bag-of-words (bow, for short), and it allows the classifier to notice that certain keywords 
 #may occur in both types of emails but with different frequencies, 
-#for example the word “Offer” is much more frequent in spam than ham emails. Python Counter subclass allows to apply the bow model.
+#for example the word Offer is much more frequent in spam than ham emails. Python Counter subclass allows to apply the bow model.
 def get_features(text, setting):
     if setting=='bow':
         return {word: count for word, count in Counter(preprocess(text)).items() if not word in stoplist}
@@ -80,7 +80,6 @@ if __name__ == "__main__":
     all_features = [(get_features(email, ''), label) for (email, label) in all_emails]
     print ('Collected ' + str(len(all_features)) + ' feature sets')
     
-    print (all_features)
  
     # train the classifier
     train_set, test_set, classifier = train(all_features, 0.8)
